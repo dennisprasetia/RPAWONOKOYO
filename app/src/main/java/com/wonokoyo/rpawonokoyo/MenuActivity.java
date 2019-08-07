@@ -212,8 +212,15 @@ public class MenuActivity extends AppCompatActivity {
 
     public void pullDataDo() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(new Date());
-        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen(date, spm.getSpIdSopir());
+        String start = sdf.format(new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+
+        String end = sdf.format(tomorrow);
+
+        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen(start, end, spm.getSpIdSopir());
         callResponse.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

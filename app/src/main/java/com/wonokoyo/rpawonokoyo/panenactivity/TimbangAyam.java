@@ -42,6 +42,7 @@ public class TimbangAyam extends AppCompatActivity {
     private EditText etBerat;
     private EditText etEkor;
     private TextView txtBantuan;
+    private Button btnRefresh;
 
     // variable lain
     SharedPrefManager spm;
@@ -147,6 +148,19 @@ public class TimbangAyam extends AppCompatActivity {
 
         threadBerat = threadBeratTimbang();
         threadBerat.start();
+
+        btnRefresh = findViewById(R.id.btnRefreshTimbang);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (threadBerat.isAlive()) {
+                    threadBerat.interrupt();
+                }
+
+                threadBerat = threadBeratTimbang();
+                threadBerat.start();
+            }
+        });
     }
 
     @Override

@@ -51,7 +51,7 @@ public class SyncronizeData extends AppCompatActivity {
     }
 
     public void pullDataDo() {
-        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen("", spm.getSpIdSopir());
+        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen("", "", spm.getSpIdSopir());
         callResponse.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
