@@ -21,6 +21,7 @@ import com.wonokoyo.rpawonokoyo.model.SharedPrefManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -87,8 +88,24 @@ public class RencanaPanen extends AppCompatActivity {
         },1000);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(new Date());
-        if (dbh.notifJumlah(spm.getSpIdSopir(), date) == 0) {
+        String start = sdf.format(new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+
+        String end = sdf.format(tomorrow);
+        /*if (dbh.notifJumlah(spm.getSpIdSopir(), date) == 0) {
+            cd.alertDialogYes("Info", "DO telah dilaksanakan semua", RencanaPanen.this,
+                    new CustomDialog.alertDialogCallBack() {
+                        @Override
+                        public void action(Boolean val, String pin) {
+
+                        }
+                    });
+        }*/
+
+        if (dbh.notifJumlahByFarm(start, end) == 0) {
             cd.alertDialogYes("Info", "DO telah dilaksanakan semua", RencanaPanen.this,
                     new CustomDialog.alertDialogCallBack() {
                         @Override
@@ -108,8 +125,15 @@ public class RencanaPanen extends AppCompatActivity {
         final List<ModelRencanaPanen> data = new ArrayList<>();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(new Date());
-        Cursor c = dbh.getRencanaPanen(spm.getSpIdSopir(), date);
+        String start = sdf.format(new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+
+        String end = sdf.format(tomorrow);
+
+        Cursor c = dbh.getRencanaPanenByFarm(start, end);
 
         boolean isSetted = false;
         for (int a = 0; a < c.getCount(); a++) {

@@ -250,11 +250,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return c.getCount();
     }
 
+    public int notifJumlahByFarm(String start, String end) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql = "SELECT * FROM " + TABLE_RENCANA + " WHERE tgl_panen BETWEEN '" + start + "' AND '" +
+                end + "' AND no_do NOT IN (SELECT no_do FROM " + TABLE_REALISASI + ")";
+        Cursor c = db.rawQuery(sql, null);
+
+        return c.getCount();
+    }
+
     public Cursor getRencanaPanen(String id_sopir, String tgl_panen) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String sql = "SELECT * FROM " + TABLE_RENCANA + " WHERE id_sopir = '" + id_sopir + "' AND tgl_panen = '" + tgl_panen + "'" +
                 "AND no_do NOT IN (SELECT no_do FROM " + TABLE_REALISASI + ")";
+        Cursor c = db.rawQuery(sql, null);
+
+        return c;
+    }
+
+    public Cursor getRencanaPanenByFarm(String start, String end) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql = "SELECT * FROM " + TABLE_RENCANA + " WHERE tgl_panen BETWEEN '" + start + "' AND '" +
+                end + "' AND no_do NOT IN (SELECT no_do FROM " + TABLE_REALISASI + ")";
         Cursor c = db.rawQuery(sql, null);
 
         return c;

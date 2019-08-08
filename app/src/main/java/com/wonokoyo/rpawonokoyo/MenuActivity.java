@@ -184,9 +184,15 @@ public class MenuActivity extends AppCompatActivity {
 
     public void notifJumlahRencana() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(new Date());
+        String start = sdf.format(new Date());
 
-        int jumlah = dbh.notifJumlah(spm.getSpIdSopir(), date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+
+        String end = sdf.format(tomorrow);
+
+        int jumlah = dbh.notifJumlahByFarm(start, end);
         if (jumlah > 0) {
             txtNotif.setText(String.valueOf(jumlah));
             btnMulai.setEnabled(true);

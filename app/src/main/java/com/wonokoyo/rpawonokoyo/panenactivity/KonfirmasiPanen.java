@@ -23,6 +23,7 @@ import com.wonokoyo.rpawonokoyo.model.SharedPrefManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -104,8 +105,15 @@ public class KonfirmasiPanen extends AppCompatActivity {
         final List<ModelRencanaPanen> data = new ArrayList<>();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(new Date());
-        Cursor c = dbh.getRencanaPanen(spm.getSpIdSopir(), date);
+        String start = sdf.format(new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+
+        String end = sdf.format(tomorrow);
+
+        Cursor c = dbh.getRencanaPanenByFarm(start, end);
 
         for (int a = 0; a < c.getCount(); a++) {
             c.moveToNext();
