@@ -123,8 +123,13 @@ public class KonfirmasiPanen extends AppCompatActivity {
 
             if (matcher.find()) {
                 ModelRencanaPanen mrp = new ModelRencanaPanen();
+
+                String noreg = c.getString(c.getColumnIndex("noreg"));
+                String kandang = noreg.trim().substring(noreg.length()-3, noreg.length()-1);
+
                 mrp.setRit(c.getString(c.getColumnIndex("rit")));
                 mrp.setNama_mitra(c.getString(c.getColumnIndex("nama_pelanggan")));
+                mrp.setKandang(kandang);
                 mrp.setNo_do(c.getString(c.getColumnIndex("no_do")));
                 mrp.setAlamat(c.getString(c.getColumnIndex("alamat_farm")));
 
@@ -140,8 +145,13 @@ public class KonfirmasiPanen extends AppCompatActivity {
 
                 if (!matcher.find()) {
                     ModelRencanaPanen mrp = new ModelRencanaPanen();
+
+                    String noreg = c.getString(c.getColumnIndex("noreg")).trim();
+                    String kandang = noreg.substring(noreg.length()-2);
+
                     mrp.setRit(c.getString(c.getColumnIndex("rit")));
                     mrp.setNama_mitra(c.getString(c.getColumnIndex("nama_pelanggan")));
+                    mrp.setKandang(kandang);
                     mrp.setNo_do(c.getString(c.getColumnIndex("no_do")));
                     mrp.setAlamat(c.getString(c.getColumnIndex("alamat_farm")));
 

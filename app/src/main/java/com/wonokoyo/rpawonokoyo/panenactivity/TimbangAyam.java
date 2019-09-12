@@ -282,7 +282,7 @@ public class TimbangAyam extends AppCompatActivity {
 //        Date date = Calendar.getInstance().getTime();
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 //        Cursor tara = dbh.getListTaraByRitAndDate(spm.getSpRit(), df.format(date));
-        int jumlah_timbang;
+        final int jumlah_timbang;
 
         // ambil perhitungan timbang ke
         if (validataSelesai(etBerat.getText().toString(), etEkor.getText().toString())) {
@@ -320,6 +320,7 @@ public class TimbangAyam extends AppCompatActivity {
                     public void run() {
                         pd.dismiss();
                         Intent intent = new Intent(TimbangAyam.this, HasilTimbang.class);
+                        intent.putExtra("jumlah_timbang", String.valueOf(jumlah_timbang));
                         startActivity(intent);
                         finish();
                     }

@@ -1,5 +1,6 @@
 package com.wonokoyo.rpawonokoyo.panenactivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class HasilTimbang extends AppCompatActivity {
     private TextView txtBeratBruto;
     private TextView txtBeratTara;
     private TextView txtBeratNetto;
+    private TextView txtJumlahTimbang;
     private Button btnOkeHasil;
 
     // variable lain
@@ -58,6 +60,7 @@ public class HasilTimbang extends AppCompatActivity {
         txtBeratBruto = findViewById(R.id.txtBeratBruto);
         txtBeratTara = findViewById(R.id.txtBeratTara);
         txtBeratNetto = findViewById(R.id.txtBeratNetto);
+        txtJumlahTimbang = findViewById(R.id.txtJumlahTimbang);
 
         btnOkeHasil = findViewById(R.id.btnOkeHasil);
         btnOkeHasil.setOnClickListener(new View.OnClickListener() {
@@ -89,5 +92,8 @@ public class HasilTimbang extends AppCompatActivity {
             txtBeratBruto.setText(c.getString(c.getColumnIndex("bruto")));
             txtBeratNetto.setText(c.getString(c.getColumnIndex("netto")));
         }
+
+        Intent intent = getIntent();
+        txtJumlahTimbang.setText(intent.getStringExtra("jumlah_timbang"));
     }
 }

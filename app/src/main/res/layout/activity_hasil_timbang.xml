@@ -41,7 +41,6 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TableRow android:paddingLeft="20dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -67,7 +66,6 @@
         </TableRow>
 
         <TableRow android:paddingLeft="20dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -93,7 +91,6 @@
         </TableRow>
 
         <TableRow android:paddingLeft="20dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -119,7 +116,6 @@
         </TableRow>
 
         <TableRow android:paddingLeft="20dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -145,7 +141,6 @@
         </TableRow>
 
         <TableRow android:paddingLeft="20dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -171,7 +166,6 @@
         </TableRow>
 
         <TableRow>
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="50dp"
@@ -188,7 +182,6 @@
             android:background="@android:color/holo_green_light"
             android:paddingTop="5dp"
             android:paddingBottom="5dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -211,7 +204,6 @@
             android:layout_marginRight="15dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -235,7 +227,6 @@
             android:background="@android:color/holo_green_light"
             android:paddingTop="5dp"
             android:paddingBottom="5dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -259,7 +250,6 @@
             android:layout_marginRight="15dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -283,7 +273,6 @@
             android:background="@android:color/holo_green_light"
             android:paddingTop="5dp"
             android:paddingBottom="5dp">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -294,6 +283,28 @@
 
             <TextView
                 android:id="@+id/txtBeratNetto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:textSize="20sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Jumlah Timbang :"
+                android:textAlignment="textEnd"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtJumlahTimbang"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

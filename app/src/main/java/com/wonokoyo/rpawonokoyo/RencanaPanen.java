@@ -146,8 +146,8 @@ public class RencanaPanen extends AppCompatActivity {
                 isSetted = true;
             }
 
-            String noreg = c.getString(c.getColumnIndex("noreg"));
-            String kandang = noreg.substring(noreg.length()-3, noreg.length()-1);
+            String noreg = c.getString(c.getColumnIndex("noreg")).trim();
+            String kandang = noreg.substring(noreg.length()-2);
 
             ModelRencanaPanen mrp = new ModelRencanaPanen();
             mrp.setRit(c.getString(c.getColumnIndex("rit")));
