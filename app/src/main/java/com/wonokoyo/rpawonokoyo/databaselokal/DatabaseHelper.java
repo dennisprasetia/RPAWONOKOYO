@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String timbang = "create table " + TABLE_TIMBANG + "(no_do text, urutan integer, kg text, ekor integer)";
         db.execSQL(timbang);
 
-        String rencana = "create table " + TABLE_RENCANA + "(no_do text, no_sj text, rit text, " +
+        String rencana = "create table " + TABLE_RENCANA + "(no_do text, no_sj text, noreg text, rit text, " +
                 "berat decimal, ekor int, tgl_panen text, nopol text, id_sopir text, sopir text, nama_pelanggan text, " +
                 "alamat_farm text, jam_brngkt text, jam_tiba_farm text, jam_mulai_panen text, " +
                 "jam_selesai_panen text, jam_tiba_rpa text, jam_siap_potong text, nik_timpanen text, " +
@@ -174,7 +174,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return c.getCount();
     }
 
-    public boolean insertRencana(String no_do, String no_sj, String rit, String berat, int ekor, String tgl_panen,
+    public boolean insertRencana(String no_do, String no_sj, String noreg, String rit, String berat, int ekor, String tgl_panen,
                                  String nopol, String id_sopir, String sopir, String nama_pelanggan , String alamat_farm,
                                  String jam_brngkt, String jam_tiba_farm, String jam_mulai_panen, String jam_selesai_panen,
                                  String jam_tiba_rpa, String jam_siap_potong, String nik_timpanen,
@@ -183,6 +183,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put("no_do", no_do);
         cv.put("no_sj", no_sj);
+        cv.put("noreg", noreg);
         cv.put("rit", rit);
         cv.put("berat", berat);
         cv.put("ekor", ekor);

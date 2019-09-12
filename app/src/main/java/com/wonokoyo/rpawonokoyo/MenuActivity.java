@@ -206,7 +206,12 @@ public class MenuActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
 
-        int count = dbh.countRealisasiPanenNotUploaded(date);
+        // sementara
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date yesterday = calendar.getTime();
+
+        int count = dbh.countRealisasiPanenNotUploaded(sdf.format(yesterday));
         if (count > 0) {
             btnRealisasi.setEnabled(true);
             btnSiapPotong.setEnabled(true);
@@ -226,7 +231,7 @@ public class MenuActivity extends AppCompatActivity {
 
         String end = sdf.format(tomorrow);
 
-        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen(start, end, spm.getSpIdSopir());
+        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen(start, end);
         callResponse.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -237,10 +242,11 @@ public class MenuActivity extends AppCompatActivity {
                         if (jsonArray.length() > 0) {
                             for (int a = 0; a < jsonArray.length(); a++) {
                                 JSONObject item = jsonArray.getJSONObject(a);
-                                if (item.getString("tipe").equalsIgnoreCase("do") &&
+                                if (item.getString("mitra").equalsIgnoreCase("wangkal") &&
+                                        item.getString("tipe").equalsIgnoreCase("do") &&
                                         dbh.cekDoRencanaExist(item.getString("no_do"))) {
                                     dbh.insertRencana(item.getString("no_do"), item.getString("no_sj"),
-                                            item.getString("rit"), item.getString("kg"),
+                                            item.getString("noreg"), item.getString("rit"), item.getString("kg"),
                                             item.getInt("ekor"), item.getString("tanggal"),
                                             item.getString("nopol"), item.getString("id_sopir"),
                                             item.getString("sopir"), item.getString("mitra"),
@@ -318,7 +324,13 @@ public class MenuActivity extends AppCompatActivity {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
-        Cursor c = dbh.getRealisasiPanen(date);
+
+        // sementara
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date yesterday = calendar.getTime();
+
+        Cursor c = dbh.getRealisasiPanen(sdf.format(yesterday));
         final ArrayList<String> arrayNoDo = new ArrayList<>();
 
         if (c.getCount() > 0) {

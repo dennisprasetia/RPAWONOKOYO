@@ -71,6 +71,7 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
 
         holder.txtRit.setText("Rit : " + mrp.getRit());
         holder.txtMitra.setText(mrp.getNama_mitra());
+        holder.txtKandang.setText(mrp.getKandang());
         holder.txtNoDo.setText(mrp.getNo_do());
         holder.txtAlamat.setText(mrp.getAlamat());
         holder.txtDetail.setVisibility(View.INVISIBLE);
@@ -122,6 +123,7 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
         CardView cardView;
         TextView txtRit;
         TextView txtMitra;
+        TextView txtKandang;
         TextView txtNoDo;
         TextView txtAlamat;
         TextView txtDetail;
@@ -131,9 +133,9 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
             cardView = itemView.findViewById(R.id.layoutCardView);
             txtRit = itemView.findViewById(R.id.txtJenisRit);
             txtMitra = itemView.findViewById(R.id.txtMitraCard);
+            txtKandang = itemView.findViewById(R.id.txtKandangCard);
             txtNoDo = itemView.findViewById(R.id.txtNoDoCard);
             txtAlamat = itemView.findViewById(R.id.txtAlamatCard);
-
             txtDetail = itemView.findViewById(R.id.txtDetail);
         }
     }

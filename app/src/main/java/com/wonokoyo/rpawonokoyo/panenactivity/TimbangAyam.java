@@ -44,6 +44,9 @@ public class TimbangAyam extends AppCompatActivity {
     private TextView txtBantuan;
     private Button btnRefresh;
 
+    private TextView txtTaraAvg1;
+    private TextView txtTaraAvg2;
+
     // variable lain
     SharedPrefManager spm;
     DatabaseHelper dbh;
@@ -181,6 +184,12 @@ public class TimbangAyam extends AppCompatActivity {
 
         Double tara_awal = (taraSample / 25) * 2;
         tm.saveSPString(TimbangManager.TM_TARA, String.format("%.2f", tara_awal));
+
+        txtTaraAvg1 = findViewById(R.id.txtTaraDiTimbang1);
+        txtTaraAvg1.setText(String.format("%.2f", (taraSample / 25)));
+
+        txtTaraAvg2 = findViewById(R.id.txtTaraDiTimbang2);
+        txtTaraAvg2.setText(tm.getTmTara());
     }
 
     public void setEkorBeratRencana() {
@@ -270,9 +279,9 @@ public class TimbangAyam extends AppCompatActivity {
     }
 
     public void saveHasilTimbang() {
-        Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Cursor tara = dbh.getListTaraByRitAndDate(spm.getSpRit(), df.format(date));
+//        Date date = Calendar.getInstance().getTime();
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        Cursor tara = dbh.getListTaraByRitAndDate(spm.getSpRit(), df.format(date));
         int jumlah_timbang;
 
         // ambil perhitungan timbang ke
@@ -282,14 +291,14 @@ public class TimbangAyam extends AppCompatActivity {
             jumlah_timbang = Integer.valueOf(etKe.getText().toString()) - 1;
         }
 
-        Double taraSample = 0.0;
-        for (int a = 0; a < tara.getCount(); a++) {
-            tara.moveToNext();
-            taraSample = taraSample + Double.parseDouble(tara.getString(tara.getColumnIndex("tara_kg")));
-        }
+//        Double taraSample = 0.0;
+//        for (int a = 0; a < tara.getCount(); a++) {
+//            tara.moveToNext();
+//            taraSample = taraSample + Double.parseDouble(tara.getString(tara.getColumnIndex("tara_kg")));
+//        }
 
         // hitung total tara, netto, dan berat rata-rata
-        Double total_tara = (taraSample / 25) * 2 * jumlah_timbang;
+        Double total_tara = Double.valueOf(tm.getTmTara()) * jumlah_timbang;
         Double netto = Double.valueOf(tm.getTmBeratReal()) - Double.valueOf(total_tara);
         Double bb_avg = netto / Double.valueOf(tm.getTmJumlahReal());
 
@@ -299,7 +308,8 @@ public class TimbangAyam extends AppCompatActivity {
         Boolean isInserted = dbh.insertRealisasi(spm.getSpNomorDo(), c.getString(c.getColumnIndex("nama_pelanggan")),
                 c.getString(c.getColumnIndex("rit")), c.getString(c.getColumnIndex("nopol")),
                 c.getString(c.getColumnIndex("tgl_panen")), tm.getTmMulai(), tm.getTmSelesai(),
-                String.valueOf(total_tara), String.format("%.2f", bb_avg), String.format("%.2f", Double.valueOf(tm.getTmBeratReal())),
+                String.format("%.2f", total_tara), String.format("%.2f", bb_avg),
+                String.format("%.2f", Double.valueOf(tm.getTmBeratReal())),
                 String.format("%.2f", netto), Integer.parseInt(tm.getTmJumlahReal()));
 
         if (isInserted) {

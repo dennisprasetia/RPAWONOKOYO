@@ -18,7 +18,8 @@ public class Vars {
     //public static final String API_GET_COUNT_RENCANA = "index.php?action=get_count_rencana";
     public static final String API_GET_COUNT_RENCANA = "get_count_rencana";
     //public static final String API_GET_RENCANA_PANEN = "index.php?action=get_rencana_panen";
-    public static final String API_GET_RENCANA_PANEN = "get_do_by_farm";
+    public static final String API_GET_RENCANA_PANEN = "get_do_between_date";
+//    public static final String API_GET_RENCANA_PANEN = "get_do_by_farm";
 //    public static final String API_GET_RENCANA_PANEN = "get_do_by_date";
     //public static final String API_GET_DETAIL_RENCANA = "index.php?action=detail_rencana_panen";
     public static final String API_SAVE_REALISASI = "save_realisasi";

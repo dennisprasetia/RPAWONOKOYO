@@ -3,6 +3,7 @@ package com.wonokoyo.rpawonokoyo.model;
 public class ModelRencanaPanen {
     private String rit;
     private String nama_mitra;
+    private String kandang;
     private String no_do;
     private String alamat;
 
@@ -24,6 +25,14 @@ public class ModelRencanaPanen {
 
     public void setNama_mitra(String nama_mitra) {
         this.nama_mitra = nama_mitra;
+    }
+
+    public String getKandang() {
+        return kandang;
+    }
+
+    public void setKandang(String kandang) {
+        this.kandang = kandang;
     }
 
     public String getNo_do() {

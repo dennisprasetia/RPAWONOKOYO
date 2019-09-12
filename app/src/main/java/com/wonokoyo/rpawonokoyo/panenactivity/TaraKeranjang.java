@@ -43,6 +43,9 @@ public class TaraKeranjang extends AppCompatActivity {
     private EditText etTara;
     private TextView txtBantuan;
 
+    private TextView txtTaraAvg1;
+    private TextView txtTaraAvg2;
+
     // variable lain
     CustomDialog cd;
     DatabaseHelper dbh;
@@ -88,6 +91,8 @@ public class TaraKeranjang extends AppCompatActivity {
                         public void run() {
                             getTaraKeranjang(spm.getSpNomorDo());
                             etTara.setText("");
+                            if (count == 5)
+                                updateTaraAvg(spm.getSpNomorDo());
                         }
                     }, 300);
                 } else {
@@ -238,5 +243,21 @@ public class TaraKeranjang extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void updateTaraAvg(String nomor_do) {
+        Cursor c = dbh.getListTaraByDo(nomor_do);
+
+        Double taraSample = 0.0;
+        for (int i = 0; i < c.getCount(); i++) {
+            c.moveToNext();
+            taraSample = taraSample + Double.parseDouble(c.getString(c.getColumnIndex("tara_kg")));
+        }
+
+        txtTaraAvg1 = findViewById(R.id.txtTaraAvg1);
+        txtTaraAvg1.setText(String.format("%.2f", (taraSample / 25)));
+
+        txtTaraAvg2 = findViewById(R.id.txtTaraAvg2);
+        txtTaraAvg2.setText(String.format("%.2f", ((taraSample / 25) * 2)));
     }
 }

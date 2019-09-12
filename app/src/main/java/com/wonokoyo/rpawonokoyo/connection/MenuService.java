@@ -19,8 +19,9 @@ public interface MenuService {
 
     @GET(Vars.API_GET_RENCANA_PANEN)
 //    Call<ResponseBody> getRencanaPanen(@Query("id_sopir") String id_sopir);
-    Call<ResponseBody> getRencanaPanen(@Query("start") String start, @Query("end") String end,
-                                       @Query("id_sopir") String id_sopir);
+//    Call<ResponseBody> getRencanaPanen(@Query("start") String start, @Query("end") String end,
+//                                       @Query("id_sopir") String id_sopir);
+    Call<ResponseBody> getRencanaPanen(@Query("start") String start, @Query("end") String end);
 
     @GET(Vars.API_SAVE_REALISASI)
     Call<ResponseBody> saveRealisasi(@Query("data_realisasi") String arrayJson);

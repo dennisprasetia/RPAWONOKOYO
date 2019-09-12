@@ -51,7 +51,7 @@ public class SyncronizeData extends AppCompatActivity {
     }
 
     public void pullDataDo() {
-        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen("", "", spm.getSpIdSopir());
+        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen("", "");
         callResponse.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -64,7 +64,7 @@ public class SyncronizeData extends AppCompatActivity {
                                 JSONObject item = jsonArray.getJSONObject(a);
                                 if (dbh.cekDoRencanaExist(item.getString("no_do"))) {
                                     dbh.insertRencana(item.getString("no_do"), item.getString("no_sj"),
-                                            item.getString("rit"), item.getString("kg"),
+                                            item.getString("noreg"),item.getString("rit"), item.getString("kg"),
                                             item.getInt("ekor"), item.getString("tanggal"),
                                             item.getString("nopol"), item.getString("id_sopir"),
                                             item.getString("sopir"), item.getString("mitra"),
