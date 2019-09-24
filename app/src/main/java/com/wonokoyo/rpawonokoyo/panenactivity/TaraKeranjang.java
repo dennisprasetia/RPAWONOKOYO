@@ -28,7 +28,8 @@ import java.util.Date;
 public class TaraKeranjang extends AppCompatActivity {
     // variable socket timbangan
     private static final int SERVERPORT = 5000;
-    private static final String SERVER_IP = "192.168.0.3";
+    private static final String SERVER_IP = "192.168.100.10";
+//    private static final String SERVER_IP = "192.168.0.3";
 //    private static final String SERVER_IP = "192.168.3.212";
 
     // variable layout

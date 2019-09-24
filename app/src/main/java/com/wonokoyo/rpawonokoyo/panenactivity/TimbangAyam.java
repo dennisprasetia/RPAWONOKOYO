@@ -30,7 +30,8 @@ import java.util.Date;
 public class TimbangAyam extends AppCompatActivity {
     // variable socket timbangan
     private static final int SERVERPORT = 5000;
-    private static final String SERVER_IP = "192.168.0.3";
+    private static final String SERVER_IP = "192.168.100.10";
+//    private static final String SERVER_IP = "192.168.0.3";
     Thread threadBerat;
 
     // variable layout
