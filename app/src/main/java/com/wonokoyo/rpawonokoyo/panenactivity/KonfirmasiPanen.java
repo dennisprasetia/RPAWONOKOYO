@@ -48,7 +48,8 @@ public class KonfirmasiPanen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE | WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_SECURE | WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_konfirmasi_panen);
 
         spm = new SharedPrefManager(this);
@@ -124,8 +125,8 @@ public class KonfirmasiPanen extends AppCompatActivity {
             if (matcher.find()) {
                 ModelRencanaPanen mrp = new ModelRencanaPanen();
 
-                String noreg = c.getString(c.getColumnIndex("noreg"));
-                String kandang = noreg.trim().substring(noreg.length()-3, noreg.length()-1);
+                String noreg = c.getString(c.getColumnIndex("noreg")).trim();
+                String kandang = noreg.substring(noreg.length()-2);
 
                 mrp.setRit(c.getString(c.getColumnIndex("rit")));
                 mrp.setNama_mitra(c.getString(c.getColumnIndex("nama_pelanggan")));
