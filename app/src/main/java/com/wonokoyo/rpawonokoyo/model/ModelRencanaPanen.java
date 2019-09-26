@@ -6,6 +6,7 @@ public class ModelRencanaPanen {
     private String kandang;
     private String no_do;
     private String alamat;
+    private String ssid;
 
     public ModelRencanaPanen() {
         super();
@@ -49,5 +50,13 @@ public class ModelRencanaPanen {
 
     public void setAlamat(String alamat) {
         this.alamat = alamat;
+    }
+
+    public String getSsid() {
+        return ssid;
+    }
+
+    public void setSsid(String ssid) {
+        this.ssid = ssid;
     }
 }

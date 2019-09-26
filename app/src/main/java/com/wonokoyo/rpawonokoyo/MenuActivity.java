@@ -254,7 +254,7 @@ public class MenuActivity extends AppCompatActivity {
                                             item.getString("jam_tiba_farm"), item.getString("mulai_panen"),
                                             item.getString("selesai_panen"), item.getString("jam_tiba_rpa"),
                                             item.getString("jam_siap_potong"), item.getString("nik_timpanen"),
-                                            item.getString("nama_timpanen"));
+                                            item.getString("nama_timpanen"), "", "");
                                 }
                             }
 

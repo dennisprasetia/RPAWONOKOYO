@@ -37,9 +37,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String rencana = "create table " + TABLE_RENCANA + "(no_do text, no_sj text, noreg text, rit text, " +
                 "berat decimal, ekor int, tgl_panen text, nopol text, id_sopir text, sopir text, nama_pelanggan text, " +
-                "alamat_farm text, jam_brngkt text, jam_tiba_farm text, jam_mulai_panen text, " +
+                "alamat_farm text, kandang text, jam_brngkt text, jam_tiba_farm text, jam_mulai_panen text, " +
                 "jam_selesai_panen text, jam_tiba_rpa text, jam_siap_potong text, nik_timpanen text, " +
-                "nama_timpanen text)";
+                "nama_timpanen text, ssid text)";
         db.execSQL(rencana);
 
         String realisasi = "create table " + TABLE_REALISASI + "(no_do text, nama_pelanggan text, " +
@@ -178,7 +178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                                  String nopol, String id_sopir, String sopir, String nama_pelanggan , String alamat_farm,
                                  String jam_brngkt, String jam_tiba_farm, String jam_mulai_panen, String jam_selesai_panen,
                                  String jam_tiba_rpa, String jam_siap_potong, String nik_timpanen,
-                                 String nama_timpanen) {
+                                 String nama_timpanen, String ssid, String kandang) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("no_do", no_do);
@@ -193,6 +193,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("sopir", sopir);
         cv.put("nama_pelanggan", nama_pelanggan);
         cv.put("alamat_farm", alamat_farm);
+        cv.put("kandang", kandang);
         cv.put("jam_brngkt", jam_brngkt);
         cv.put("jam_tiba_farm", jam_tiba_farm);
         cv.put("jam_mulai_panen", jam_mulai_panen);
@@ -201,6 +202,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("jam_siap_potong", jam_siap_potong);
         cv.put("nik_timpanen", nik_timpanen);
         cv.put("nama_timpanen", nama_timpanen);
+        cv.put("ssid", ssid);
         long result = db.insert(TABLE_RENCANA, null, cv);
 
         if (result == -1) {
