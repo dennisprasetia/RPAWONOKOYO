@@ -70,28 +70,28 @@
                             android:textColor="@android:color/white" />
                     </TableRow>
 
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.3"
-                            android:text="Kandang"
-                            android:textColor="@android:color/white" />
+                    <!--<TableRow>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="0.3"-->
+                            <!--android:text="Kandang"-->
+                            <!--android:textColor="@android:color/white" />-->
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.1"
-                            android:text=":"
-                            android:textColor="@android:color/white" />
+                        <!--<TextView-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="0.1"-->
+                            <!--android:text=":"-->
+                            <!--android:textColor="@android:color/white" />-->
 
-                        <TextView
-                            android:id="@+id/txtKandangCard"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@android:color/white" />
-                    </TableRow>
+                        <!--<TextView-->
+                            <!--android:id="@+id/txtKandangCard"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:textColor="@android:color/white" />-->
+                    <!--</TableRow>-->
 
                     <TableRow>
                         <TextView

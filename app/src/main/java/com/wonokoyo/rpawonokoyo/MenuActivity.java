@@ -1,10 +1,13 @@
 package com.wonokoyo.rpawonokoyo;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,6 +55,8 @@ public class MenuActivity extends AppCompatActivity {
     SharedPrefManager spm;
     DatabaseHelper dbh;
     ProgressDialog pd;
+
+    private static final int REQUEST_WIFI_PERMISSION = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +117,8 @@ public class MenuActivity extends AppCompatActivity {
         btnMulai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                requestPermissions(new String[] {Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_WIFI_PERMISSION);
                 Intent intent = new Intent(MenuActivity.this, KonfirmasiPanen.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -180,6 +187,17 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_WIFI_PERMISSION) {
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Butuh akses status WiFi untuk melanjutkan", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void notifJumlahRencana() {

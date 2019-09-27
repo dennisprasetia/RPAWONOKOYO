@@ -1,6 +1,7 @@
 package com.wonokoyo.rpawonokoyo.utilities;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -76,7 +77,7 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
 
         holder.txtRit.setText("Rit : " + mrp.getRit());
         holder.txtMitra.setText(mrp.getNama_mitra());
-        holder.txtKandang.setText(mrp.getKandang());
+//        holder.txtKandang.setText(mrp.getKandang());
         holder.txtNoDo.setText(mrp.getNo_do());
         holder.txtAlamat.setText(mrp.getAlamat());
         holder.txtDetail.setVisibility(View.INVISIBLE);
@@ -84,24 +85,38 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mrp.getSsid().equalsIgnoreCase(getCurrentSsid(mContext))) {
+                String testwifi = "bwj-kandang1";
+                String wifissid = getCurrentSsid(mContext);
+                if (testwifi.equalsIgnoreCase(wifissid)) {
                     tampilKonfirmasi(mrp);
                 } else {
+                    Toast.makeText(mContext, getCurrentSsid(mContext), Toast.LENGTH_LONG).show();
                     // isi dengan alert dialog salah kandang karena ssid berbeda
+                    String msg = "Wifi dan kandang tidak sesuai dengan DO, harap pindah ke kandang " + mrp.getKandang()
+                            + " sesuai dengan DO dan ulangi kembali Mulai Panen.";
+                    cd.alertDialogYes("Peringatan", msg, mContext, new CustomDialog.alertDialogCallBack() {
+                        @Override
+                        public void action(Boolean val, String pin) {
+                            if (val) {
+                                ((Activity) mContext).finish();
+                            }
+                        }
+                    });
                 }
             }
         });
     }
 
     public String getCurrentSsid(Context context) {
-          String ssid = "";
+          String ssid = null;
           ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-          NetworkInfo networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+          NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
           if (networkInfo.isConnected()) {
               final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
               final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
               if (connectionInfo != null && !TextUtils.isEmpty(connectionInfo.getSSID())) {
-                  ssid = connectionInfo.getSSID();
+                  String replace = connectionInfo.getSSID();
+                  ssid = replace.replace("\"", "");
               }
           }
           return ssid;
@@ -150,7 +165,7 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
         CardView cardView;
         TextView txtRit;
         TextView txtMitra;
-        TextView txtKandang;
+//        TextView txtKandang;
         TextView txtNoDo;
         TextView txtAlamat;
         TextView txtDetail;
@@ -160,7 +175,7 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
             cardView = itemView.findViewById(R.id.layoutCardView);
             txtRit = itemView.findViewById(R.id.txtJenisRit);
             txtMitra = itemView.findViewById(R.id.txtMitraCard);
-            txtKandang = itemView.findViewById(R.id.txtKandangCard);
+//            txtKandang = itemView.findViewById(R.id.txtKandangCard);
             txtNoDo = itemView.findViewById(R.id.txtNoDoCard);
             txtAlamat = itemView.findViewById(R.id.txtAlamatCard);
             txtDetail = itemView.findViewById(R.id.txtDetail);
