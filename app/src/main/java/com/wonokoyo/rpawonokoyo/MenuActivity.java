@@ -66,6 +66,8 @@ public class MenuActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_SECURE | WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // set full screen dengan status bar
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        requestPermissions(new String[] {Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.ACCESS_FINE_LOCATION},
+                REQUEST_WIFI_PERMISSION);
         setContentView(R.layout.activity_menu);
 
         cd = new CustomDialog();
@@ -117,8 +119,6 @@ public class MenuActivity extends AppCompatActivity {
         btnMulai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestPermissions(new String[] {Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_WIFI_PERMISSION);
                 Intent intent = new Intent(MenuActivity.this, KonfirmasiPanen.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -272,7 +272,8 @@ public class MenuActivity extends AppCompatActivity {
                                             item.getString("jam_tiba_farm"), item.getString("mulai_panen"),
                                             item.getString("selesai_panen"), item.getString("jam_tiba_rpa"),
                                             item.getString("jam_siap_potong"), item.getString("nik_timpanen"),
-                                            item.getString("nama_timpanen"), "", "");
+                                            item.getString("nama_timpanen"), item.getString("wifi_ssid"),
+                                            item.getString("kandang"));
                                 }
                             }
 

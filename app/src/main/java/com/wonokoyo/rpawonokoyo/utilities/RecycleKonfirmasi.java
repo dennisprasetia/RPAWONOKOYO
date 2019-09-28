@@ -85,9 +85,8 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String testwifi = "bwj-kandang1";
                 String wifissid = getCurrentSsid(mContext);
-                if (testwifi.equalsIgnoreCase(wifissid)) {
+                if (mrp.getSsid().equalsIgnoreCase(wifissid)) {
                     tampilKonfirmasi(mrp);
                 } else {
                     Toast.makeText(mContext, getCurrentSsid(mContext), Toast.LENGTH_LONG).show();
