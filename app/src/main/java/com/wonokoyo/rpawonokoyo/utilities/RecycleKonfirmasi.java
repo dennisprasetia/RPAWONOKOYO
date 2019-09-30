@@ -87,7 +87,7 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
             public void onClick(View v) {
                 String wifissid = getCurrentSsid(mContext);
                 if (mrp.getSsid().equalsIgnoreCase(wifissid)) {
-                    tampilKonfirmasi(mrp);
+                    mulaiPanen(mrp);
                 } else {
                     Toast.makeText(mContext, getCurrentSsid(mContext), Toast.LENGTH_LONG).show();
                     // isi dengan alert dialog salah kandang karena ssid berbeda
@@ -153,6 +153,31 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
                 }
             }
         });
+    }
+
+    private void mulaiPanen(ModelRencanaPanen mrp) {
+        spm.saveSPString(SharedPrefManager.SP_NOMOR_DO, mrp.getNo_do());
+        spm.saveSPBoolean(SharedPrefManager.SP_PANEN, true);
+
+        if (spm.getSpRit().equalsIgnoreCase("")) {
+            spm.saveSPString(SharedPrefManager.SP_RIT, mrp.getRit());
+        } else {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Cursor c = dbh.getListTaraByRitAndDate(spm.getSpRit(), df.format(new Date()));
+
+            // cek apakah tara sudah selesai atau belum
+            if (c.getCount() < 5) {
+                spm.saveSPString(SharedPrefManager.SP_SESSION, "tara");
+            } else {
+                spm.saveSPString(SharedPrefManager.SP_SESSION, "timbang");
+            }
+        }
+
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        tm.saveSPString(TimbangManager.TM_MULAI, df.format(date));
+
+        goToLastSession();
     }
 
     @Override
