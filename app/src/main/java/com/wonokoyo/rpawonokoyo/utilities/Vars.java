@@ -2,9 +2,9 @@ package com.wonokoyo.rpawonokoyo.utilities;
 
 public class Vars {
     // base path untuk akses api
-    public static final String BASE_PATH = "http://192.168.203.99/ekspedisi.dev/api/mus/";
+//    public static final String BASE_PATH = "http://192.168.203.99/ekspedisi.dev/api/mus/";
 //    public static final String BASE_PATH = "http://192.168.111.17/ekspedisimus/api/mus/";
-//    public static final String BASE_PATH = "http://vpn.wonokoyo.co.id:8017/ekspedisimus/api/mus/";
+    public static final String BASE_PATH = "http://vpn.wonokoyo.co.id:8017/ekspedisimus/api/mus/";
 
     // untuk login menggunakan fingerprint
     //public static final String API_LOGIN = "index.php?action=login";
