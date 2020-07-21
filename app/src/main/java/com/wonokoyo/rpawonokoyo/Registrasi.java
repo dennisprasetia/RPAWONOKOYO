@@ -52,6 +52,7 @@ public class Registrasi extends AppCompatActivity {
     CustomDialog cd;
     ProgressDialog pd;
     private String[] daftarNamaSopir;
+    private String[] daftarNamaTimpanen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,8 @@ public class Registrasi extends AppCompatActivity {
 
         mContext = this;
 
-        pullDataSopir();
+//        pullDataSopir();
+        pullDataTimpanen();
 
         etIMEI = findViewById(R.id.etIMEI);
         etNomorTelp = findViewById(R.id.etNomorTelp);
@@ -138,6 +140,7 @@ public class Registrasi extends AppCompatActivity {
                                 }
                             } else {
                                 Toast.makeText(Registrasi.this, "Tidak terhubung", Toast.LENGTH_LONG).show();
+                                pd.dismiss();
                             }
                         }
 
@@ -150,6 +153,8 @@ public class Registrasi extends AppCompatActivity {
                             if (t.getMessage().contains("failed to connect")) {
                                 Toast.makeText(Registrasi.this, "Cek Kembali Koneksi Anda", Toast.LENGTH_LONG).show();
                             }
+
+                            pd.dismiss();
                         }
                     });
                 }
@@ -188,6 +193,51 @@ public class Registrasi extends AppCompatActivity {
                         }
 
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, daftarNamaSopir);
+                        etNamaRegister.setAdapter(adapter);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Log.e("CEK", "GAGAL");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                if (t.getMessage().equalsIgnoreCase("timeout")) {
+                    Toast.makeText(Registrasi.this, "Koneksi ke server gagal", Toast.LENGTH_LONG).show();
+                }
+
+                if (t.getMessage().contains("failed to connect")) {
+                    Toast.makeText(Registrasi.this, "Cek kembali koneksi anda", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void pullDataTimpanen() {
+        Call<ResponseBody> ambilDaftarSopir = RetrofitInstance.userAPI().getDataTimpanen();
+        ambilDaftarSopir.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        JSONArray jsonArray = jsonObject.getJSONArray("content");
+
+                        if (jsonArray.length() > 0) {
+                            daftarNamaTimpanen = new String[jsonArray.length()];
+                            for (int a = 0; a < jsonArray.length(); a++) {
+                                JSONObject item = jsonArray.getJSONObject(a);
+
+                                daftarNamaTimpanen[a] = item.getString("timpanen");
+                                dbh.insertSopir(item.getString("nik_timpanen"), item.getString("timpanen"));
+                            }
+                        }
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, daftarNamaTimpanen);
                         etNamaRegister.setAdapter(adapter);
                     } catch (JSONException e) {
                         e.printStackTrace();

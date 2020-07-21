@@ -318,7 +318,6 @@ public class LoginActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("content");
                         if (jsonArray.length() > 0) {
                             JSONObject item = jsonArray.getJSONObject(0);
-                            String id_sopir = item.getString("id_sopir");
 
                             if (pd.isShowing()) {
                                 final Handler handler = new Handler();
@@ -330,6 +329,8 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 }, 500);
                             }
+
+                            String id_sopir = item.getString("id_sopir");
 
                             spm.saveSPString(SharedPrefManager.SP_ID_SOPIR, id_sopir);
                             spm.saveSPBoolean(SharedPrefManager.SP_LOGIN, true);

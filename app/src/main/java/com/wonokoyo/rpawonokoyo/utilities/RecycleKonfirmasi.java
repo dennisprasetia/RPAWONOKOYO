@@ -85,7 +85,9 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String wifissid = getCurrentSsid(mContext);
+                mulaiPanen(mrp);
+
+                /*String wifissid = getCurrentSsid(mContext);
                 if (mrp.getSsid().equalsIgnoreCase(wifissid)) {
                     mulaiPanen(mrp);
                 } else {
@@ -101,7 +103,7 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
                             }
                         }
                     });
-                }
+                }*/
             }
         });
     }

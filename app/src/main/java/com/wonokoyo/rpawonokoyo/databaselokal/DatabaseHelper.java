@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String realisasi = "create table " + TABLE_REALISASI + "(no_do text, nama_pelanggan text, " +
                 "rit text, nopol text, tgl_panen text, jam_mulai_panen text, jam_selesai_panen text, " +
-                "tara_total text, bb_avg numeric, bruto numeric, netto numeric, ekor integer, status int)";
+                "tara_total text, tara_tandu text, bb_avg numeric, bruto numeric, netto numeric, ekor integer, status int)";
         db.execSQL(realisasi);
 
         String user = "create table " + TABLE_USER + "(id_sopir text, sopir text, username text, device_id text)";
@@ -283,6 +283,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    public Cursor getRencanaByDo(String no_do) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql = "SELECT * FROM " + TABLE_RENCANA + " WHERE no_do = '" + no_do + "'";
+
+        Cursor c = db.rawQuery(sql, null);
+
+        return c;
+    }
+
     public Cursor getEkorBeratRencana(String no_do) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -302,8 +312,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean insertRealisasi(String no_do, String pelanggan, String rit, String nopol, String tanggal,
-                                   String mulai, String selesai, String tara_total, String bb_avg, String bruto,
-                                   String netto, Integer jumlah) {
+                                   String mulai, String selesai, String tara_total, String tara_tandu, String bb_avg,
+                                   String bruto, String netto, Integer jumlah) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("nama_pelanggan", pelanggan);
@@ -314,6 +324,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("jam_mulai_panen", mulai);
         cv.put("jam_selesai_panen", selesai);
         cv.put("tara_total", tara_total);
+        cv.put("tara_tandu", tara_tandu);
         cv.put("bb_avg", bb_avg);
         cv.put("bruto", bruto);
         cv.put("netto", netto);
@@ -349,7 +360,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getRealisasiPanen(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String sql = "SELECT * FROM " + TABLE_REALISASI + " WHERE tgl_panen = '" + date + "' AND status = 0";
+        String sql = "SELECT * FROM " + TABLE_REALISASI + " WHERE tgl_panen <= '" + date + "' AND status = 0";
         Cursor c = db.rawQuery(sql, null);
 
         return c;
@@ -358,7 +369,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int countRealisasiPanenNotUploaded(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String sql = "SELECT * FROM " + TABLE_REALISASI + " WHERE tgl_panen = '" + date + "' AND status = 0";
+        String sql = "SELECT * FROM " + TABLE_REALISASI + " WHERE tgl_panen <= '" + date + "' AND status = 0";
         Cursor c = db.rawQuery(sql, null);
 
         return c.getCount();

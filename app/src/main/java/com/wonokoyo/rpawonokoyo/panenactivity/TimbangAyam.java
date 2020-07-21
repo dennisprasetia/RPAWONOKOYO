@@ -275,8 +275,8 @@ public class TimbangAyam extends AppCompatActivity {
 
         etBerat.setText("");
         etEkor.setText("");
-//        etBerat.requestFocus();
-        etEkor.requestFocus();
+        etBerat.requestFocus();
+//        etEkor.requestFocus();
     }
 
     public void saveHasilTimbang() {
@@ -309,7 +309,7 @@ public class TimbangAyam extends AppCompatActivity {
         Boolean isInserted = dbh.insertRealisasi(spm.getSpNomorDo(), c.getString(c.getColumnIndex("nama_pelanggan")),
                 c.getString(c.getColumnIndex("rit")), c.getString(c.getColumnIndex("nopol")),
                 c.getString(c.getColumnIndex("tgl_panen")), tm.getTmMulai(), tm.getTmSelesai(),
-                String.format("%.2f", total_tara), String.format("%.2f", bb_avg),
+                String.format("%.2f", total_tara), tm.getTmTara(), String.format("%.2f", bb_avg),
                 String.format("%.2f", Double.valueOf(tm.getTmBeratReal())),
                 String.format("%.2f", netto), Integer.parseInt(tm.getTmJumlahReal()));
 

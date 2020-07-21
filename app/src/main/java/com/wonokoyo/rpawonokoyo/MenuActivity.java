@@ -149,13 +149,7 @@ public class MenuActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         // set default rit dan nomor do
-                        spm.saveSPString(SharedPrefManager.SP_RIT, "");
-                        spm.saveSPString(SharedPrefManager.SP_NOMOR_DO, "");
-                        spm.saveSPString(SharedPrefManager.SP_SESSION, "");
-
                         pd.dismiss();
-                        btnRealisasi.setEnabled(false);
-                        btnSiapPotong.setEnabled(false);
                     }
                 },1000);
             }
@@ -187,6 +181,12 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        pd.dismiss();
+        super.onDestroy();
     }
 
     @Override
@@ -260,8 +260,23 @@ public class MenuActivity extends AppCompatActivity {
                         if (jsonArray.length() > 0) {
                             for (int a = 0; a < jsonArray.length(); a++) {
                                 JSONObject item = jsonArray.getJSONObject(a);
-                                if (item.getString("mitra").equalsIgnoreCase("wangkal") &&
+                                /*if (item.getString("mitra").equalsIgnoreCase("wangkal") &&
                                         item.getString("tipe").equalsIgnoreCase("do") &&
+                                        dbh.cekDoRencanaExist(item.getString("no_do"))) {
+                                    dbh.insertRencana(item.getString("no_do"), item.getString("no_sj"),
+                                            item.getString("noreg"), item.getString("rit"), item.getString("kg"),
+                                            item.getInt("ekor"), item.getString("tanggal"),
+                                            item.getString("nopol"), item.getString("id_sopir"),
+                                            item.getString("sopir"), item.getString("mitra"),
+                                            item.getString("alamat_farm"), item.getString("jam_brngkt"),
+                                            item.getString("jam_tiba_farm"), item.getString("mulai_panen"),
+                                            item.getString("selesai_panen"), item.getString("jam_tiba_rpa"),
+                                            item.getString("jam_siap_potong"), item.getString("nik_timpanen"),
+                                            item.getString("nama_timpanen"), item.getString("wifi_ssid"),
+                                            item.getString("kandang"));
+                                }*/
+
+                                if (item.getString("tipe").equalsIgnoreCase("do") &&
                                         dbh.cekDoRencanaExist(item.getString("no_do"))) {
                                     dbh.insertRencana(item.getString("no_do"), item.getString("no_sj"),
                                             item.getString("noreg"), item.getString("rit"), item.getString("kg"),
@@ -355,18 +370,26 @@ public class MenuActivity extends AppCompatActivity {
         if (c.getCount() > 0) {
             for (int a = 0; a < c.getCount(); a++) {
                 c.moveToNext();
+
+                Cursor d = dbh.getRencanaByDo(c.getString(c.getColumnIndex("no_do")));
+                d.moveToNext();
+
                 try {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("no_do", c.getString(c.getColumnIndex("no_do")));
+                    jsonObject.put("no_sj", d.getString(d.getColumnIndex("no_sj")));
                     jsonObject.put("rit", c.getString(c.getColumnIndex("rit")));
                     jsonObject.put("tgl_panen", c.getString(c.getColumnIndex("tgl_panen")));
                     jsonObject.put("jam_mulai_panen", c.getString(c.getColumnIndex("jam_mulai_panen")));
                     jsonObject.put("jam_selesai_panen", c.getString(c.getColumnIndex("jam_selesai_panen")));
                     jsonObject.put("bb_rata", c.getString(c.getColumnIndex("bb_avg")));
                     jsonObject.put("tara_total", c.getString(c.getColumnIndex("tara_total")));
+                    jsonObject.put("tara_tandu", c.getString(c.getColumnIndex("tara_tandu")));
                     jsonObject.put("bruto", c.getString(c.getColumnIndex("bruto")));
                     jsonObject.put("netto", c.getString(c.getColumnIndex("netto")));
                     jsonObject.put("ekor", c.getString(c.getColumnIndex("ekor")));
+                    jsonObject.put("tgl_realsj", date);
+                    jsonObject.put("nik_timpanen", spm.getSpIdSopir());
 
                     arrayJson.add(jsonObject);
                     arrayNoDo.add(c.getString(c.getColumnIndex("no_do")));
@@ -390,6 +413,12 @@ public class MenuActivity extends AppCompatActivity {
                                     dbh.updateRealisasiUpload(arrayNoDo.get(a));
                                     saveDetailTaraKeranjang(arrayNoDo.get(a));
                                 }
+                                spm.saveSPString(SharedPrefManager.SP_RIT, "");
+                                spm.saveSPString(SharedPrefManager.SP_NOMOR_DO, "");
+                                spm.saveSPString(SharedPrefManager.SP_SESSION, "");
+
+                                btnRealisasi.setEnabled(false);
+                                btnSiapPotong.setEnabled(false);
                                 Toast.makeText(MenuActivity.this, "Data realisasi berhasil disimpan", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {

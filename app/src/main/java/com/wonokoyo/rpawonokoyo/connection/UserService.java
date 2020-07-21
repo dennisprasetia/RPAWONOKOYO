@@ -23,4 +23,7 @@ public interface UserService {
 
     @GET(Vars.API_DATA_SOPIR)
     Call<ResponseBody> getDataSopir();
+
+    @GET(Vars.API_DATA_TIMPANEN)
+    Call<ResponseBody> getDataTimpanen();
 }
