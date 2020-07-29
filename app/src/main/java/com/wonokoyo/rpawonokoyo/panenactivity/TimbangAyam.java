@@ -37,6 +37,7 @@ public class TimbangAyam extends AppCompatActivity {
     // variable layout
     private TextView txtSisaEkor;
     private TextView txtSisaBerat;
+    private TextView tvInfoBbRata;
     private Button btnNext;
     private Button btnSelesai;
     private EditText etKe;
@@ -73,9 +74,11 @@ public class TimbangAyam extends AppCompatActivity {
 
         txtSisaEkor = findViewById(R.id.txtSisaEkor);
         txtSisaBerat = findViewById(R.id.txtSisaBerat);
+        tvInfoBbRata = findViewById(R.id.tvInfoBbRata);
         etKe = findViewById(R.id.etKe);
         etBerat = findViewById(R.id.etBerat);
         etEkor = findViewById(R.id.etEkor);
+
         setEkorBeratRencana();
         setTaraAwal();
 
@@ -85,7 +88,7 @@ public class TimbangAyam extends AppCompatActivity {
             public void onClick(View v) {
                 if (validateInput(etBerat.getText().toString(), etEkor.getText().toString())) {
                     int urutan = Integer.parseInt(etKe.getText().toString());
-                    String kg = etBerat.getText().toString();
+                    String kg = etBerat.getText().toString().replace(",", ".");
                     int jumlah = Integer.parseInt(etEkor.getText().toString());
                     saveTimbangAyam(urutan, kg, jumlah);
 
@@ -110,7 +113,7 @@ public class TimbangAyam extends AppCompatActivity {
                                 if (val) {
                                     if (validataSelesai(etBerat.getText().toString(), etEkor.getText().toString())) {
                                         int urutan = Integer.parseInt(etKe.getText().toString());
-                                        String kg = etBerat.getText().toString();
+                                        String kg = etBerat.getText().toString().replace(",", ".");
                                         int jumlah = Integer.parseInt(etEkor.getText().toString());
                                         saveTimbangAyam(urutan, kg, jumlah);
                                     }
@@ -124,6 +127,7 @@ public class TimbangAyam extends AppCompatActivity {
                                     saveHasilTimbang();
                                     spm.saveSPString(SharedPrefManager.SP_SESSION, "");
                                     spm.saveSPBoolean(SharedPrefManager.SP_PANEN, false);
+                                    spm.saveSPString(SharedPrefManager.SP_RIT, "");
                                 }
                             }
                         });
@@ -184,10 +188,10 @@ public class TimbangAyam extends AppCompatActivity {
         }
 
         Double tara_awal = (taraSample / 25) * 2;
-        tm.saveSPString(TimbangManager.TM_TARA, String.format("%.2f", tara_awal));
+        tm.saveSPString(TimbangManager.TM_TARA, String.format("%.1f", tara_awal));
 
         txtTaraAvg1 = findViewById(R.id.txtTaraDiTimbang1);
-        txtTaraAvg1.setText(String.format("%.2f", (taraSample / 25)));
+        txtTaraAvg1.setText(String.format("%.1f", (taraSample / 25)));
 
         txtTaraAvg2 = findViewById(R.id.txtTaraDiTimbang2);
         txtTaraAvg2.setText(tm.getTmTara());
@@ -200,10 +204,12 @@ public class TimbangAyam extends AppCompatActivity {
         int ekorsisa = Integer.parseInt(c.getString(c.getColumnIndex("ekor"))) -
                 Integer.parseInt(tm.getTmJumlahReal());
         Double beratsisa = Double.valueOf(c.getDouble(c.getColumnIndex("berat"))) -
-                Double.valueOf(tm.getTmBeratReal());
+                Double.valueOf(tm.getTmBeratBersih());
+        Double bbRata = Double.valueOf(tm.getTmBeratBersih()) / Integer.valueOf(tm.getTmJumlahReal());
 
         txtSisaEkor.setText(String.valueOf(ekorsisa));
         txtSisaBerat.setText(String.format("%.2f", beratsisa));
+        tvInfoBbRata.setText(String.format("%.2f", bbRata));
     }
 
     public Boolean validateInput(String berat, String jumlah) {
@@ -246,37 +252,34 @@ public class TimbangAyam extends AppCompatActivity {
 
     //save berat dan ekor timbangan ke
     public void saveTimbangAyam(int ke, String kg, int jumlah) {
-        Boolean isInserted = dbh.insertTimbangAyam(spm.getSpNomorDo(), ke, String.format("%.2f", Double.valueOf(kg)), jumlah);
+        Boolean isInserted = dbh.insertTimbangAyam(spm.getSpNomorDo(), ke, String.format("%.1f", Double.valueOf(kg)), jumlah);
         if (isInserted) {
             Toast.makeText(TimbangAyam.this, "Penimbangan berhasil", Toast.LENGTH_SHORT);
-            Double netto_timbang = Double.valueOf(kg) - Double.valueOf(tm.getTmTara());
-            setSisa(jumlah, String.format("%.2f", netto_timbang));
+            Double netto_timbang = Double.valueOf(kg) - Double.valueOf(tm.getTmTara().replace(",", "."));
+            setSisa(jumlah, String.valueOf(netto_timbang));
             setTimbangKe();
-
-//            if (ke % 10 == 0) {
-//                Intent intent = new Intent(TimbangAyam.this, TaraKeranjang.class);
-//                startActivity(intent);
-//            } else {
-//                setTimbangKe();
-//            }
         }
     }
 
     public void setSisa(int jumlah, String berat) {
         int ekorsisa = Integer.parseInt(txtSisaEkor.getText().toString()) - jumlah;
-        Double beratsisa = Double.valueOf(txtSisaBerat.getText().toString()) - Double.valueOf(berat);
-        Double beratreal = Double.valueOf(tm.getTmBeratReal()) + Double.valueOf(berat) + Double.valueOf(tm.getTmTara());
+
+        Double beratsisa = Double.valueOf(txtSisaBerat.getText().toString().replace(",", ".")) - Double.valueOf(berat);
+        Double beratreal = Double.valueOf(tm.getTmBeratReal()) + Double.valueOf(berat) + Double.valueOf(tm.getTmTara().replace(",", "."));
 
         tm.saveSPString(TimbangManager.TM_BERAT_REAL, String.valueOf(beratreal));
-        tm.saveSPString(TimbangManager.TM_JUMLAH_REAL, String.valueOf(Integer.parseInt(tm.getTmJumlahReal()) + jumlah));
+        tm.saveSPString(TimbangManager.TM_BERAT_BERSIH, String.valueOf(Double.valueOf(tm.getTmBeratBersih()) + Double.valueOf(berat)));
+        tm.saveSPString(TimbangManager.TM_JUMLAH_REAL, String.valueOf(Integer.valueOf(tm.getTmJumlahReal()) + jumlah));
+
+        Double bbrata = Double.valueOf(tm.getTmBeratBersih()) / Integer.valueOf(tm.getTmJumlahReal());
 
         txtSisaEkor.setText(String.valueOf(ekorsisa));
         txtSisaBerat.setText(String.format("%.2f",beratsisa));
+        tvInfoBbRata.setText(String.format("%.2f", bbrata));
 
         etBerat.setText("");
-        etEkor.setText("");
-        etBerat.requestFocus();
-//        etEkor.requestFocus();
+//        etBerat.requestFocus();
+        etEkor.requestFocus();
     }
 
     public void saveHasilTimbang() {
@@ -299,7 +302,7 @@ public class TimbangAyam extends AppCompatActivity {
 //        }
 
         // hitung total tara, netto, dan berat rata-rata
-        Double total_tara = Double.valueOf(tm.getTmTara()) * jumlah_timbang;
+        Double total_tara = Double.valueOf(tm.getTmTara().replace(",", ".")) * jumlah_timbang;
         Double netto = Double.valueOf(tm.getTmBeratReal()) - Double.valueOf(total_tara);
         Double bb_avg = netto / Double.valueOf(tm.getTmJumlahReal());
 
@@ -309,7 +312,7 @@ public class TimbangAyam extends AppCompatActivity {
         Boolean isInserted = dbh.insertRealisasi(spm.getSpNomorDo(), c.getString(c.getColumnIndex("nama_pelanggan")),
                 c.getString(c.getColumnIndex("rit")), c.getString(c.getColumnIndex("nopol")),
                 c.getString(c.getColumnIndex("tgl_panen")), tm.getTmMulai(), tm.getTmSelesai(),
-                String.format("%.2f", total_tara), tm.getTmTara(), String.format("%.2f", bb_avg),
+                String.format("%.1f", total_tara), tm.getTmTara().replace(",", "."), String.format("%.2f", bb_avg),
                 String.format("%.2f", Double.valueOf(tm.getTmBeratReal())),
                 String.format("%.2f", netto), Integer.parseInt(tm.getTmJumlahReal()));
 

@@ -43,6 +43,7 @@ public class TaraKeranjang extends AppCompatActivity {
 //    private TextView txtTara6;
     private EditText etTara;
     private TextView txtBantuan;
+    private TextView tvInfoDo;
 
     private TextView txtTaraAvg1;
     private TextView txtTaraAvg2;
@@ -66,6 +67,9 @@ public class TaraKeranjang extends AppCompatActivity {
         dbh = new DatabaseHelper(this);
         spm = new SharedPrefManager(this);
 
+        tvInfoDo = findViewById(R.id.tvInfoDO);
+        tvInfoDo.setText(spm.getSpNomorDo());
+
         txtTara1 = findViewById(R.id.txtTara1);
         txtTara2 = findViewById(R.id.txtTara2);
         txtTara3 = findViewById(R.id.txtTara3);
@@ -84,18 +88,22 @@ public class TaraKeranjang extends AppCompatActivity {
                 count++;
 
                 if (count < 6) {
-                    saveTaraKeranjang(String.valueOf(etTara.getText()));
+                    if (!etTara.getText().toString().equalsIgnoreCase("")) {
+                        saveTaraKeranjang(String.valueOf(etTara.getText()));
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            getTaraKeranjang(spm.getSpNomorDo());
-                            etTara.setText("");
-                            if (count == 5)
-                                updateTaraAvg(spm.getSpNomorDo());
-                        }
-                    }, 300);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                getTaraKeranjang(spm.getSpNomorDo());
+                                etTara.setText("");
+                                if (count == 5)
+                                    updateTaraAvg(spm.getSpNomorDo());
+                            }
+                        }, 300);
+                    } else {
+                        etTara.setError("Tidak Boleh Kosong");
+                    }
                 } else {
                     Intent intent = new Intent(TaraKeranjang.this, TimbangAyam.class);
                     startActivity(intent);
@@ -256,9 +264,9 @@ public class TaraKeranjang extends AppCompatActivity {
         }
 
         txtTaraAvg1 = findViewById(R.id.txtTaraAvg1);
-        txtTaraAvg1.setText(String.format("%.2f", (taraSample / 25)));
+        txtTaraAvg1.setText(String.format("%.1f", (taraSample / 25)));
 
         txtTaraAvg2 = findViewById(R.id.txtTaraAvg2);
-        txtTaraAvg2.setText(String.format("%.2f", ((taraSample / 25) * 2)));
+        txtTaraAvg2.setText(String.format("%.1f", ((taraSample / 25) * 2)));
     }
 }

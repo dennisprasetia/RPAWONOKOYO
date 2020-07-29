@@ -9,6 +9,7 @@ public class TimbangManager {
     public static final String TM_SELESAI = "tmSelesai";
     public static final String TM_TARA = "tmTara";
     public static final String TM_BERAT_REAL = "tmBeratReal";
+    public static final String TM_BERAT_BERSIH = "tmBeratBersih";
     public static final String TM_JUMLAH_REAL = "tmJumlahReal";
 
     SharedPreferences sp;
@@ -44,11 +45,14 @@ public class TimbangManager {
         return sp.getString(TM_BERAT_REAL, "0.0");
     }
 
+    public String getTmBeratBersih() { return sp.getString(TM_BERAT_BERSIH, "0.0"); }
+
     public void clearSessionTimbang() {
         saveSPString(TM_MULAI, "0000-00-00 00:00:00");
         saveSPString(TM_SELESAI, "0000-00-00 00:00:00");
         saveSPString(TM_TARA, "0.0");
         saveSPString(TM_BERAT_REAL, "0.0");
         saveSPString(TM_JUMLAH_REAL, "0");
+        saveSPString(TM_BERAT_BERSIH, "0.0");
     }
 }

@@ -382,11 +382,11 @@ public class MenuActivity extends AppCompatActivity {
                     jsonObject.put("tgl_panen", c.getString(c.getColumnIndex("tgl_panen")));
                     jsonObject.put("jam_mulai_panen", c.getString(c.getColumnIndex("jam_mulai_panen")));
                     jsonObject.put("jam_selesai_panen", c.getString(c.getColumnIndex("jam_selesai_panen")));
-                    jsonObject.put("bb_rata", c.getString(c.getColumnIndex("bb_avg")));
-                    jsonObject.put("tara_total", c.getString(c.getColumnIndex("tara_total")));
-                    jsonObject.put("tara_tandu", c.getString(c.getColumnIndex("tara_tandu")));
-                    jsonObject.put("bruto", c.getString(c.getColumnIndex("bruto")));
-                    jsonObject.put("netto", c.getString(c.getColumnIndex("netto")));
+                    jsonObject.put("bb_rata", c.getString(c.getColumnIndex("bb_avg")).replace(",", "."));
+                    jsonObject.put("tara_total", c.getString(c.getColumnIndex("tara_total")).replace(",", "."));
+                    jsonObject.put("tara_tandu", c.getString(c.getColumnIndex("tara_tandu")).replace(",", "."));
+                    jsonObject.put("bruto", c.getString(c.getColumnIndex("bruto")).replace(",", "."));
+                    jsonObject.put("netto", c.getString(c.getColumnIndex("netto")).replace(",", "."));
                     jsonObject.put("ekor", c.getString(c.getColumnIndex("ekor")));
                     jsonObject.put("tgl_realsj", date);
                     jsonObject.put("nik_timpanen", spm.getSpIdSopir());
@@ -426,6 +426,8 @@ public class MenuActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    } else {
+                        Toast.makeText(MenuActivity.this, "Data realisasi gagal simpan", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -457,7 +459,7 @@ public class MenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("urut", c.getInt(c.getColumnIndex("ke")));
-                    jsonObject.put("tara_kg", c.getString(c.getColumnIndex("tara_kg")));
+                    jsonObject.put("tara_kg", c.getString(c.getColumnIndex("tara_kg")).replace(",", "."));
 
                     arrayJson.add(jsonObject);
                 } catch (JSONException e) {
@@ -483,6 +485,8 @@ public class MenuActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    } else {
+                        Toast.makeText(MenuActivity.this, "Data tara gagal simpan", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -510,7 +514,7 @@ public class MenuActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("urut", c.getInt(c.getColumnIndex("urutan")));
-                    jsonObject.put("kg", c.getString(c.getColumnIndex("kg")));
+                    jsonObject.put("kg", c.getString(c.getColumnIndex("kg")).replace(",", "."));
                     jsonObject.put("ekor", c.getInt(c.getColumnIndex("ekor")));
 
                     arrayJson.add(jsonObject);
@@ -536,6 +540,8 @@ public class MenuActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    } else {
+                        Toast.makeText(MenuActivity.this, "Data timbang gagal simpan", Toast.LENGTH_LONG).show();
                     }
                 }
 

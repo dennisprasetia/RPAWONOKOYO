@@ -146,13 +146,10 @@ public class RencanaPanen extends AppCompatActivity {
                 isSetted = true;
             }
 
-            String noreg = c.getString(c.getColumnIndex("noreg")).trim();
-            String kandang = noreg.substring(noreg.length()-2);
-
             ModelRencanaPanen mrp = new ModelRencanaPanen();
             mrp.setRit(c.getString(c.getColumnIndex("rit")));
             mrp.setNama_mitra(c.getString(c.getColumnIndex("nama_pelanggan")));
-            mrp.setKandang(kandang);
+            mrp.setKandang(c.getString(c.getColumnIndex("kandang")));
             mrp.setNo_do(c.getString(c.getColumnIndex("no_do")));
             mrp.setAlamat(c.getString(c.getColumnIndex("alamat_farm")));
 

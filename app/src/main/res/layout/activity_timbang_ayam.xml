@@ -13,9 +13,8 @@
         android:layout_marginBottom="8dp"
         android:background="#ee0000"
         android:fontFamily="@font/baloo"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:text="Timbang Ayam"
-        android:textAlignment="center"
         android:textColor="@color/cardview_light_background"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,6 +102,11 @@
                 android:layout_weight="0.5"
                 android:inputType="numberSigned|number|numberDecimal"
                 android:textAlignment="center" />
+<!--                android:clickable="false"-->
+<!--                android:cursorVisible="false"-->
+<!--                android:longClickable="false"-->
+<!--                android:focusable="false"-->
+<!--                android:textIsSelectable="false" />-->
 
             <TextView
                 android:layout_width="0dp"
@@ -199,7 +203,7 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="#ee0000"
@@ -220,12 +224,11 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/success_color"
         android:text="Selesai"
-        android:textColor="@android:color/white"
+        android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnNext"
-        app:layout_constraintHorizontal_bias="0.986"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
         app:layout_constraintVertical_bias="0.0" />
@@ -237,9 +240,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/success_color"
         android:text="Refresh"
-        app:layout_constraintEnd_toStartOf="@+id/btnSelesai"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textColor="#FFF"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout2" />
 
@@ -283,6 +288,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="8dp"
+        android:text="BB Rata :"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
         android:id="@+id/txtTaraDiTimbang1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -303,4 +319,15 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/txtTaraDiTimbang1" />
+
+    <TextView
+        android:id="@+id/tvInfoBbRata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/txtTaraDiTimbang2" />
 </android.support.constraint.ConstraintLayout>
