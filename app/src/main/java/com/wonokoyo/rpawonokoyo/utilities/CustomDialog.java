@@ -162,7 +162,7 @@ public class CustomDialog {
         ad.setMessage(message);
         ad.setCancelable(true);
 
-        ad.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+        ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 adc.action(true, "");

@@ -293,6 +293,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    public Cursor getRencanaBySj(String no_sj) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql = "SELECT * FROM " + TABLE_RENCANA + " WHERE no_sj = '" + no_sj + "'";
+
+        Cursor c = db.rawQuery(sql, null);
+
+        return c;
+    }
+
     public Cursor getEkorBeratRencana(String no_do) {
         SQLiteDatabase db = this.getReadableDatabase();
 

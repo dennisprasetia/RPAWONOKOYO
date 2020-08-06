@@ -159,20 +159,17 @@ public class RecycleKonfirmasi extends RecyclerView.Adapter<RecycleKonfirmasi.Re
 
     private void mulaiPanen(ModelRencanaPanen mrp) {
         spm.saveSPString(SharedPrefManager.SP_NOMOR_DO, mrp.getNo_do());
+        spm.saveSPString(SharedPrefManager.SP_RIT, mrp.getRit());
         spm.saveSPBoolean(SharedPrefManager.SP_PANEN, true);
 
-        if (spm.getSpRit().equalsIgnoreCase("")) {
-            spm.saveSPString(SharedPrefManager.SP_RIT, mrp.getRit());
-        } else {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            Cursor c = dbh.getListTaraByRitAndDate(spm.getSpRit(), df.format(new Date()));
+        SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
+        Cursor c = dbh.getListTaraByRitAndDate(spm.getSpRit(), dft.format(new Date()));
 
-            // cek apakah tara sudah selesai atau belum
-            if (c.getCount() < 5) {
-                spm.saveSPString(SharedPrefManager.SP_SESSION, "tara");
-            } else {
-                spm.saveSPString(SharedPrefManager.SP_SESSION, "timbang");
-            }
+        // cek apakah tara sudah selesai atau belum
+        if (c.getCount() < 5) {
+            spm.saveSPString(SharedPrefManager.SP_SESSION, "tara");
+        } else {
+            spm.saveSPString(SharedPrefManager.SP_SESSION, "timbang");
         }
 
         Date date = Calendar.getInstance().getTime();

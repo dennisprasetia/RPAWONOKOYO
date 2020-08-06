@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.wonokoyo.rpawonokoyo.connection.RetrofitInstance;
 import com.wonokoyo.rpawonokoyo.databaselokal.DatabaseHelper;
 import com.wonokoyo.rpawonokoyo.panenactivity.KonfirmasiPanen;
+import com.wonokoyo.rpawonokoyo.panenactivity.ScanSjPanen;
 import com.wonokoyo.rpawonokoyo.utilities.CustomDialog;
 import com.wonokoyo.rpawonokoyo.model.SharedPrefManager;
 
@@ -119,7 +120,7 @@ public class MenuActivity extends AppCompatActivity {
         btnMulai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, KonfirmasiPanen.class);
+                Intent intent = new Intent(MenuActivity.this, ScanSjPanen.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

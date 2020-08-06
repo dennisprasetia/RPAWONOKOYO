@@ -1,129 +1,128 @@
 <resources>
-    <string name="app_name">TIM PANEN</string>
-    <string name="promt_username">Username</string>
-    <string name="promt_password">Password</string>
-    <string name="action_settings">Settings</string>
-    <string name="cancel">Cancel</string>
-    <string name="use_password">Use password</string>
-    <string name="sign_in">Sign in</string>
-    <string name="ok">OK</string>
-    <string name="password">Password</string>
-    <string name="fingerprint_description">Confirm fingerprint to continue</string>
-    <string name="fingerprint_hint">Touch sensor</string>
-    <string name="password_description">Enter your store password to continue</string>
-    <string name="purchase">Purchase</string>
-    <string name="purchase_not_invalidated">Purchase not invalidated</string>
-    <string name="purchase_button_not_invalidated_description">
+	<string name="app_name">TIM PANEN</string>
+	<string name="promt_username">Username</string>
+	<string name="promt_password">Password</string>
+	<string name="action_settings">Settings</string>
+	<string name="cancel">Cancel</string>
+	<string name="use_password">Use password</string>
+	<string name="sign_in">Sign in</string>
+	<string name="ok">OK</string>
+	<string name="password">Password</string>
+	<string name="fingerprint_description">Confirm fingerprint to continue</string>
+	<string name="fingerprint_hint">Touch sensor</string>
+	<string name="password_description">Enter your store password to continue</string>
+	<string name="purchase">Purchase</string>
+	<string name="purchase_not_invalidated">Purchase not invalidated</string>
+	<string name="purchase_button_not_invalidated_description">
 You can proceed to purchase with this button \n even if a new fingerprint is enrolled
 </string>
-    <string name="fingerprint_not_recognized">Fingerprint not recognized. Try again</string>
-    <string name="fingerprint_success">Fingerprint recognized</string>
-    <string name="item_title">White Mesh Pluto Backpack</string>
-    <string name="item_price">$62.68</string>
-    <string name="item_description">
+	<string name="fingerprint_not_recognized">Fingerprint not recognized. Try again</string>
+	<string name="fingerprint_success">Fingerprint recognized</string>
+	<string name="item_title">White Mesh Pluto Backpack</string>
+	<string name="item_price">$62.68</string>
+	<string name="item_description">
 Mesh backpack in white. Black textile trim throughout.
 </string>
-    <string name="purchase_done">Purchase successful</string>
-    <string name="new_fingerprint_enrolled_description">
+	<string name="purchase_done">Purchase successful</string>
+	<string name="new_fingerprint_enrolled_description">
 A new fingerprint was added to this device, so your password is required.
 </string>
-    <string name="use_fingerprint_in_future">Use fingerprint in the future</string>
-    <string name="use_fingerprint_to_authenticate_title">Use fingerprint to authenticate</string>
-    <string name="use_fingerprint_to_authenticate_key">use_fingerprint_to_authenticate_key</string>
-    <string name="description_bugdroid_icon">Android bugdroid image</string>
-    <string name="description_fingerprint_icon">Fingerprint icon</string>
+	<string name="use_fingerprint_in_future">Use fingerprint in the future</string>
+	<string name="use_fingerprint_to_authenticate_title">Use fingerprint to authenticate</string>
+	<string name="use_fingerprint_to_authenticate_key">use_fingerprint_to_authenticate_key</string>
+	<string name="description_bugdroid_icon">Android bugdroid image</string>
+	<string name="description_fingerprint_icon">Fingerprint icon</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!--petunjuk rencana panen-->
-    <string name="petunjuk_rencana_panen_1">
+	<!--petunjuk rencana panen-->
+	<string name="petunjuk_rencana_panen_1">
         Cek koneksi wifi sudah terhubung dengan (st-pakan) atau belum.
     </string>
-    <string name="petunjuk_rencana_panen_2">
+	<string name="petunjuk_rencana_panen_2">
         Jika wifi sudah terhubung, tekan tombol "Rencana Panen" untuk mengambil nomor DO.
     </string>
-    <string name="petunjuk_rencana_panen_3">
+	<string name="petunjuk_rencana_panen_3">
         Jika tidak muncul / error, ulangi langkah nomor 2.
     </string>
-    <string name="petunjuk_rencana_panen_4">
+	<string name="petunjuk_rencana_panen_4">
         Lanjutkan ke proses finger print di komputer untuk mendapatkan Surat Jalan.
     </string>
-    <string name="petunjuk_rencana_panen_5">
+	<string name="petunjuk_rencana_panen_5">
         Menuju kandang untuk melakukan proses panen.
     </string>
 
-    <!--petunjuk realisasi panen-->
-    <string name="petunjuk_realisasi_panen_1">
+	<!--petunjuk realisasi panen-->
+	<string name="petunjuk_realisasi_panen_1">
         Realisasi Panen hanya berfungsi untuk melihat hasil penimbangan mulai dari total tara, berat rata-rata, bruto, netto, dan jumlah ayam.
     </string>
-    <string name="petunjuk_realisasi_panen_2">
+	<string name="petunjuk_realisasi_panen_2">
         Tombol Realisasi Panen akan aktif jika sudah ada DO yang selesai dilaksanakan.
     </string>
-    <string name="petunjuk_realisasi_panen_3">
+	<string name="petunjuk_realisasi_panen_3">
         Pilih DO untuk melihat hasil realisasi DO yang sudah dilaksanakan.
     </string>
 
-    <!--petunjuk siap potong-->
-    <string name="petunjuk_siap_potong_1">
+	<!--petunjuk siap potong-->
+	<string name="petunjuk_siap_potong_1">
         Cek koneksi wifi sudah terhubungan dengan (st-pakan) atau belum.
     </string>
-    <string name="petunjuk_siap_potong_2">
+	<string name="petunjuk_siap_potong_2">
         Tekan tombol siap potong untuk menyelesaikan DO dan ayam siap potong.
     </string>
 
-    <!--petunjuk proses panen-->
-    <string name="petunjuk_panen_1">
+	<!--petunjuk proses panen-->
+	<string name="petunjuk_panen_1">
         Pilih DO yang ingin dijalankan dengan menekan kotak yang berisi nomor DO.
     </string>
-    <string name="petunjuk_panen_2">
+	<string name="petunjuk_panen_2">
         Masukkan PIN sesuai dengan SMS yang dikirimkan.
     </string>
 
-    <!--petunjuk timbang tara-->
-    <string name="petunjuk_tara_1">
+	<!--petunjuk timbang tara-->
+	<string name="petunjuk_tara_1">
         Lakukan penimbangan tara sebanyak 5 kali dengan keranjang kosong.
     </string>
-    <string name="petunjuk_tara_2">
+	<string name="petunjuk_tara_2">
         Nilai (berat) timbangan akan otomatis masuk ketika tombol "send" pada tibangan ditekan.
         Tekan "Lanjut" untuk penimbangan berikutnya.
     </string>
-    <string name="petunjuk_tara_3">
+	<string name="petunjuk_tara_3">
         Jika angka tidak muncul pada aplikasi, tekan tombol refresh dan ulangi langkah nomor 2.
     </string>
-    <string name="petunjuk_tara_4">
+	<string name="petunjuk_tara_4">
         Jika sudah dilakukan 5 kali penimbangan, tekan "lanjut" maka proses timbang tara otomatis selesai.
     </string>
 
-    <!--petunjuk timbang ayam-->
-    <string name="petunjuk_timbang_ayam_1">
+	<!--petunjuk timbang ayam-->
+	<string name="petunjuk_timbang_ayam_1">
         Lakukan penimbangan ayam sebanyak yang dibutuhkan dengan maksimum 60 kali penimbangan.
     </string>
-    <string name="petunjuk_timbang_ayam_2">
+	<string name="petunjuk_timbang_ayam_2">
         Nilai (berat) timbangan akan otomatis masuk ketika tombol "send" pada timbangan ditekan.
     </string>
-    <string name="petunjuk_timbang_ayam_3">
+	<string name="petunjuk_timbang_ayam_3">
         Jika angka tidak muncul pada aplikasi, tekan tombol refresh dan ulangi langkah nomor 2.
     </string>
-    <string name="petunjuk_timbang_ayam_4">
+	<string name="petunjuk_timbang_ayam_4">
         Masukkan jumlah ekor ayam yang ditimbang, tekan "Lanjut" untuk penimbangan berikutnya.
     </string>
-    <string name="petunjuk_timbang_ayam_5">
+	<string name="petunjuk_timbang_ayam_5">
         Tekan "Selesai" untuk mengakhiri proses panen.
     </string>
 
-    <!--informasi timbang ayam-->
-    <string name="informasi_1">
+	<!--informasi timbang ayam-->
+	<string name="informasi_1">
         Berat yang tampil adalah netto dan ekor yang tampil adalah estimasi jumlah ekor dari DO.
     </string>
-    <string name="informasi_2">
+	<string name="informasi_2">
         Berat dan ekor akan berkurang secara otomatis sesuai dengan timbangan.
     </string>
-    <string name="informasi_3">
+	<string name="informasi_3">
         Nilai tara akan otomatis terhitung setelah penimbangan tara dan tersimpan ke dalam aplikasi.
         Nilai netto setiap timbangan diperoleh dari nilai timbangan dikurangi nilai tara.
     </string>
-    <string name="informasi_4">
+	<string name="informasi_4">
         Berat akan berkurang sesuai dengan nilai netto dan ekor akan berkurang sesuai jumlah yang dimasukkan.
     </string>
 </resources>
