@@ -4,7 +4,7 @@ public class Vars {
     // base path untuk akses api
 //    public static final String BASE_PATH = "http://192.168.203.99/ekspedisi.dev/api/mus/";
 //    public static final String BASE_PATH = "http://192.168.111.17/ekspedisimus/api/mus/";
-    public static final String BASE_PATH = "http://vpn.wonokoyo.co.id:8017/ekspedisimus/api/mus/";
+    public static final String BASE_PATH = "https://vpn.wonokoyo.co.id:8017/ekspedisimus/api/mus/";
 
     // untuk login menggunakan fingerprint
     //public static final String API_LOGIN = "index.php?action=login";
@@ -20,8 +20,8 @@ public class Vars {
     public static final String API_GET_COUNT_RENCANA = "get_count_rencana";
     //public static final String API_GET_RENCANA_PANEN = "index.php?action=get_rencana_panen";
     public static final String API_GET_RENCANA_PANEN = "get_do_between_date";
-//    public static final String API_GET_RENCANA_PANEN = "get_do_by_farm";
-//    public static final String API_GET_RENCANA_PANEN = "get_do_by_date";
+    //public static final String API_GET_RENCANA_PANEN = "get_do_by_farm";
+    //public static final String API_GET_RENCANA_PANEN = "get_do_by_date";
     //public static final String API_GET_DETAIL_RENCANA = "index.php?action=detail_rencana_panen";
     public static final String API_SAVE_REALISASI = "save_realisasi_sj";
     public static final String API_SAVE_TARA = "save_tara";
