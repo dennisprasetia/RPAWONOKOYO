@@ -91,7 +91,7 @@ public class RencanaPanen extends AppCompatActivity {
         String start = sdf.format(new Date());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
         Date tomorrow = calendar.getTime();
 
         String end = sdf.format(tomorrow);
@@ -105,7 +105,7 @@ public class RencanaPanen extends AppCompatActivity {
                     });
         }*/
 
-        if (dbh.notifJumlahByFarm(start, end) == 0) {
+        if (dbh.notifJumlahByFarm(end, start) == 0) {
             cd.alertDialogYes("Info", "DO telah dilaksanakan semua", RencanaPanen.this,
                     new CustomDialog.alertDialogCallBack() {
                         @Override
@@ -128,12 +128,12 @@ public class RencanaPanen extends AppCompatActivity {
         String start = sdf.format(new Date());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
         Date tomorrow = calendar.getTime();
 
         String end = sdf.format(tomorrow);
 
-        Cursor c = dbh.getRencanaPanenByFarm(start, end);
+        Cursor c = dbh.getRencanaPanenByFarm(end, start);
 
         boolean isSetted = false;
         for (int a = 0; a < c.getCount(); a++) {

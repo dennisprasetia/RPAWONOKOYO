@@ -272,7 +272,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
-        android:text="Tara 1 (krjg) :"
+        android:text="Tara (ksng) :"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRefreshTimbang" />
@@ -285,6 +285,7 @@
         android:layout_marginTop="8dp"
         android:text="Tara 2 (krjg) :"
         android:textSize="18sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -292,7 +293,7 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
         android:text="BB Rata :"
         android:textSize="18sp"
@@ -318,6 +319,7 @@
         android:layout_marginTop="8dp"
         android:text="0"
         android:textSize="18sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/txtTaraDiTimbang1" />
 

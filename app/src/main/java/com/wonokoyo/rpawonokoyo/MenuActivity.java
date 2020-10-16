@@ -206,12 +206,12 @@ public class MenuActivity extends AppCompatActivity {
         String start = sdf.format(new Date());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
         Date tomorrow = calendar.getTime();
 
         String end = sdf.format(tomorrow);
 
-        int jumlah = dbh.notifJumlahByFarm(start, end);
+        int jumlah = dbh.notifJumlahByFarm(end, start);
         if (jumlah > 0) {
             txtNotif.setText(String.valueOf(jumlah));
             btnMulai.setEnabled(true);
@@ -227,7 +227,7 @@ public class MenuActivity extends AppCompatActivity {
 
         // sementara
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
         Date yesterday = calendar.getTime();
 
         int count = dbh.countRealisasiPanenNotUploaded(sdf.format(yesterday));
@@ -245,12 +245,12 @@ public class MenuActivity extends AppCompatActivity {
         String start = sdf.format(new Date());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
         Date tomorrow = calendar.getTime();
 
         String end = sdf.format(tomorrow);
 
-        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen(start, end);
+        Call<ResponseBody> callResponse = RetrofitInstance.menuAPI().getRencanaPanen(end, start);
         callResponse.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -278,6 +278,7 @@ public class MenuActivity extends AppCompatActivity {
                                 }*/
 
                                 if (item.getString("tipe").equalsIgnoreCase("do") &&
+                                        item.getString("no_do").contains("RPA") &&
                                         dbh.cekDoRencanaExist(item.getString("no_do"))) {
                                     dbh.insertRencana(item.getString("no_do"), item.getString("no_sj"),
                                             item.getString("noreg"), item.getString("rit"), item.getString("kg"),

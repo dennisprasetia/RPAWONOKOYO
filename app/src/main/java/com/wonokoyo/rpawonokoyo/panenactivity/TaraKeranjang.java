@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,11 +52,14 @@ public class TaraKeranjang extends AppCompatActivity {
     private TextView txtTaraAvg1;
     private TextView txtTaraAvg2;
 
+    private Spinner cmbTipe;
+
     // variable lain
     CustomDialog cd;
     DatabaseHelper dbh;
     SharedPrefManager spm;
     int count;
+    int max_count = 0;
     Thread threadBerat;
 
     @Override
@@ -79,6 +86,29 @@ public class TaraKeranjang extends AppCompatActivity {
 
         etTara = findViewById(R.id.etTara);
 
+        cmbTipe = findViewById(R.id.cmbTipeKeranjang);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
+                new String[] { "Pilih Tipe", "TANDU", "KERANJANG" });
+        cmbTipe.setAdapter(adapter);
+
+        cmbTipe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String tipe = cmbTipe.getItemAtPosition(i).toString();
+                if (tipe == "TANDU") {
+                    max_count = 2;
+                }
+                if (tipe == "KERANJANG") {
+                    max_count = 6;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         btnLanjut = findViewById(R.id.btnLanjut);
         btnLanjut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +117,9 @@ public class TaraKeranjang extends AppCompatActivity {
                 count = c.getCount();
                 count++;
 
-                if (count < 6) {
-                    if (!etTara.getText().toString().equalsIgnoreCase("")) {
+                if (count < max_count) {
+                    if (!etTara.getText().toString().equalsIgnoreCase("") &&
+                            !etTara.getText().toString().equalsIgnoreCase("0.0")) {
                         saveTaraKeranjang(String.valueOf(etTara.getText()));
 
                         Handler handler = new Handler();
@@ -97,18 +128,23 @@ public class TaraKeranjang extends AppCompatActivity {
                             public void run() {
                                 getTaraKeranjang(spm.getSpNomorDo());
                                 etTara.setText("");
-                                if (count == 5)
+                                if (count == (max_count - 1)) {
                                     updateTaraAvg(spm.getSpNomorDo());
+                                }
                             }
                         }, 300);
                     } else {
                         etTara.setError("Tidak Boleh Kosong");
                     }
                 } else {
-                    Intent intent = new Intent(TaraKeranjang.this, TimbangAyam.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
+                    if (cmbTipe.getSelectedItemPosition() != 0) {
+                        Intent intent = new Intent(TaraKeranjang.this, TimbangAyam.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        finish();
+                    } else {
+                        Snackbar.make(v, "Harap Pilih Tipe Tara", Snackbar.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -263,10 +299,14 @@ public class TaraKeranjang extends AppCompatActivity {
             taraSample = taraSample + Double.parseDouble(c.getString(c.getColumnIndex("tara_kg")));
         }
 
-        txtTaraAvg1 = findViewById(R.id.txtTaraAvg1);
-        txtTaraAvg1.setText(String.format("%.1f", (taraSample / 25)));
+        Double pembagi = 0.0;
+        if (max_count == 2) {
+            pembagi = 1.0;
+        } else {
+            pembagi = Double.valueOf(25/2);
+        }
 
-        txtTaraAvg2 = findViewById(R.id.txtTaraAvg2);
-        txtTaraAvg2.setText(String.format("%.1f", ((taraSample / 25) * 2)));
+        txtTaraAvg1 = findViewById(R.id.txtTaraAvg1);
+        txtTaraAvg1.setText(String.format("%.1f", (taraSample / pembagi)));
     }
 }
