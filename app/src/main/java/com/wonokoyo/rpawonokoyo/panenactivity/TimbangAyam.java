@@ -187,14 +187,21 @@ public class TimbangAyam extends AppCompatActivity {
             taraSample = taraSample + Double.parseDouble(tara.getString(tara.getColumnIndex("tara_kg")));
         }
 
-        Double tara_awal = (taraSample / 25) * 2;
-        tm.saveSPString(TimbangManager.TM_TARA, String.format("%.1f", tara_awal));
+        Double cetak_tara = 0.0;
+        if (tara.getCount() == 5) {
+            Double tara_awal = (taraSample / 25) * 2;
+            cetak_tara = tara_awal;
+            tm.saveSPString(TimbangManager.TM_TARA, String.format("%.1f", tara_awal));
+        } else if (tara.getCount() == 1) {
+            cetak_tara = taraSample;
+            tm.saveSPString(TimbangManager.TM_TARA, String.format("%.1f", taraSample));
+        }
 
         txtTaraAvg1 = findViewById(R.id.txtTaraDiTimbang1);
-        txtTaraAvg1.setText(String.format("%.1f", (taraSample / 25)));
+        txtTaraAvg1.setText(String.format("%.1f", (cetak_tara)));
 
         txtTaraAvg2 = findViewById(R.id.txtTaraDiTimbang2);
-        txtTaraAvg2.setText(tm.getTmTara());
+        txtTaraAvg2.setText(String.format("%.1f", (cetak_tara)));
     }
 
     public void setEkorBeratRencana() {
@@ -215,6 +222,11 @@ public class TimbangAyam extends AppCompatActivity {
     public Boolean validateInput(String berat, String jumlah) {
         if (berat.trim().length() == 0) {
             Toast.makeText(TimbangAyam.this, "Data berat kosong", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (berat.equalsIgnoreCase("0.0")) {
+            Toast.makeText(TimbangAyam.this, "Data berat tidak boleh bernilai 0", Toast.LENGTH_LONG).show();
             return false;
         }
 
