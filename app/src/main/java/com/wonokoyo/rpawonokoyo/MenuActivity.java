@@ -278,6 +278,7 @@ public class MenuActivity extends AppCompatActivity {
                                 }*/
 
                                 if (item.getString("tipe").equalsIgnoreCase("do") &&
+                                        item.getString("no_do").contains("RPA") &&
                                         dbh.cekDoRencanaExist(item.getString("no_do"))) {
                                     dbh.insertRencana(item.getString("no_do"), item.getString("no_sj"),
                                             item.getString("noreg"), item.getString("rit"), item.getString("kg"),
