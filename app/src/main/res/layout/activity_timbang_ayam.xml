@@ -101,12 +101,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:inputType="numberSigned|number|numberDecimal"
-                android:textAlignment="center" />
-<!--                android:clickable="false"-->
-<!--                android:cursorVisible="false"-->
-<!--                android:longClickable="false"-->
-<!--                android:focusable="false"-->
-<!--                android:textIsSelectable="false" />-->
+                android:textAlignment="center"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:longClickable="false"
+                android:focusable="false"
+                android:textIsSelectable="false" />
 
             <TextView
                 android:layout_width="0dp"

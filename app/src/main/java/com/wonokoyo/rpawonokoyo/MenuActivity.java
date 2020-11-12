@@ -105,14 +105,15 @@ public class MenuActivity extends AppCompatActivity {
                 pd.show();
                 pd.setCancelable(false);
 
-                if (!dbh.skipPullRencana(df.format(date))) {
-                    pullDataDo();
-                } else {
-                    Intent intent = new Intent(MenuActivity.this, RencanaPanen.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                }
+                pullDataDo();
+//                if (!dbh.skipPullRencana(df.format(date))) {
+//                    pullDataDo();
+//                } else {
+//                    Intent intent = new Intent(MenuActivity.this, RencanaPanen.class);
+//                    startActivity(intent);
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                }
             }
         });
 
@@ -278,7 +279,8 @@ public class MenuActivity extends AppCompatActivity {
                                 }*/
 
                                 if (item.getString("tipe").equalsIgnoreCase("do") &&
-                                        dbh.cekDoRencanaExist(item.getString("no_do"))) {
+                                        dbh.cekDoRencanaExist(item.getString("no_do")) &&
+                                        item.getString("no_do").contains("BDY")) {
                                     dbh.insertRencana(item.getString("no_do"), item.getString("no_sj"),
                                             item.getString("noreg"), item.getString("rit"), item.getString("kg"),
                                             item.getInt("ekor"), item.getString("tanggal"),

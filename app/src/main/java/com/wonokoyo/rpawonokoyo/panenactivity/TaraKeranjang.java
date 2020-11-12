@@ -88,7 +88,8 @@ public class TaraKeranjang extends AppCompatActivity {
                 count++;
 
                 if (count < 6) {
-                    if (!etTara.getText().toString().equalsIgnoreCase("")) {
+                    if (!etTara.getText().toString().equalsIgnoreCase("") &&
+                            !etTara.getText().toString().equalsIgnoreCase("0.0")) {
                         saveTaraKeranjang(String.valueOf(etTara.getText()));
 
                         Handler handler = new Handler();
